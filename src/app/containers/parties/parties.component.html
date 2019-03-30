@@ -1,0 +1,6 @@
+<div class="container">
+  <h1 class="text-center">Zvoľte stranu kandidáta</h1>
+  <div class="parties">
+    <app-party *ngFor="let party of (parties$ | async)" [party]="party" [routerLink]="'/parties/' + party.name + '/candidates'"></app-party>
+  </div>
+</div>

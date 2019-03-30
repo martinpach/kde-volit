@@ -10,10 +10,32 @@ import { CandidateComponent } from './components/candidate/candidate.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FormsModule } from '@angular/forms';
+import { PartiesComponent } from './containers/parties/parties.component';
+import { PartyComponent } from './components/party/party.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [AppComponent, CandidatesComponent, HomePageComponent, VotingPlaceComponent, CandidateComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, MaterialModule, AppRoutingModule, FormsModule],
+  declarations: [
+    AppComponent,
+    CandidatesComponent,
+    HomePageComponent,
+    VotingPlaceComponent,
+    CandidateComponent,
+    PartiesComponent,
+    PartyComponent
+  ],
+  imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
+    AngularFirestoreModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    AppRoutingModule,
+    FormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
