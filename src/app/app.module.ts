@@ -13,7 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PartiesComponent } from './containers/parties/parties.component';
 import { PartyComponent } from './components/party/party.component';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -28,8 +28,7 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(),
-    AngularFirestoreModule,
+    AngularFireDatabaseModule,
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
