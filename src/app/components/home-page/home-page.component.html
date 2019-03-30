@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <main class="text-center">
+    <input
+      class="address-input"
+      [class.address-input--hidden]="!showAddress"
+      name="address"
+      type="text"
+      placeholder="Adresa trvalého bydliska"
+    />
+    <p>Budem voliť <a (click)="setAddressVisible()">vo svojom okrsku</a> / <a>mám volebný preukaz</a></p>
+    <button mat-stroked-button routerLink="/candidates">Zoznam kandidátov</button>
+  </main>
+</div>
