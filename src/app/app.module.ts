@@ -9,7 +9,7 @@ import { VotingPlaceComponent } from './components/voting-place/voting-place.com
 import { CandidateComponent } from './components/candidate/candidate.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PartiesComponent } from './containers/parties/parties.component';
 import { PartyComponent } from './components/party/party.component';
 import { AngularFireModule } from '@angular/fire';
@@ -34,7 +34,8 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
