@@ -1,3 +1,8 @@
-<p>
-  candidates works!
-</p>
+<div class="container">
+  <h1 class="text-center">Zoznam kandidátov pre stranu {{ party }}</h1>
+  <div class="candidates">
+    <div *ngFor="let candidate of (candidates$ | async)">
+      <app-candidate [candidate]="candidate"></app-candidate>
+    </div>
+  </div>
+</div>

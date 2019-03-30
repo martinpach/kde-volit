@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { CandidatesComponent } from './containers/candidates/candidates.component';
 import { VotingPlaceComponent } from './components/voting-place/voting-place.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { PartiesComponent } from './containers/parties/parties.component';
 
 const routes: Routes = [
-  { path: 'candidates', component: CandidatesComponent },
+  { path: 'parties', component: PartiesComponent },
+  { path: 'parties/:id/candidates', component: CandidatesComponent },
   { path: 'voting-place', component: VotingPlaceComponent },
   { path: '', component: HomePageComponent },
   { path: '**', redirectTo: '' }
