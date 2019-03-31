@@ -7,12 +7,9 @@
   }
 }
 
-.top {
-  display: flex;
-}
 
 .info {
-  margin-left: 2rem;
+  padding: 0 2rem;
 }
 
 img {
@@ -20,4 +17,32 @@ img {
   width: 200px;
   height: 200px;
   object-fit: cover;
+  margin: 0 2rem;
+}
+
+
+@media (max-width: 767.98px) {
+
+  * {
+    margin: 0;
+    padding: 0;
+    style: none;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .image-container {
+    display: block;
+    width: 100%;
+    max-height: 100px;
+  }
+
+  .info {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+  }
 }
