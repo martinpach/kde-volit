@@ -20,12 +20,19 @@ export class VotingPlaceComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private db: DatabaseService) {
-    navigator.geolocation.getCurrentPosition(console.log, console.log, { timeout: 300000 });
     route.queryParams.subscribe(({ place }) => {
       if (!place) {
-        this.db.getAllPlaces().subscribe((places: any) => {
+        this.db.getAllPlaces('miestnosti').subscribe((places: any) => {
           places.forEach(p => this.addMarker(p.latlon.lat, p.latlon.lon, p.place));
         });
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            this.latitude = position.coords.latitude;
+            this.longitude = position.coords.latitude;
+          },
+          console.log,
+          { timeout: 300000 }
+        );
       } else {
         this.createMarker(place);
       }
@@ -41,6 +48,8 @@ export class VotingPlaceComponent implements OnInit {
         var lat = data.results[0].geometry.location.lat;
         var lon = data.results[0].geometry.location.lng;
         this.addMarker(lat, lon, place);
+        this.latitude = lat;
+        this.longitude = lon;
       });
   }
 }

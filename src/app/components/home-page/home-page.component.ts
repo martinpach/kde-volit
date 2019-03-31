@@ -20,7 +20,7 @@ export class HomePageComponent implements OnInit {
   dataset;
 
   constructor(private db: DatabaseService, private router: Router) {
-    this.db.getAllPlaces().subscribe(data => {
+    this.db.getAllPlaces('volby').subscribe(data => {
       this.dataset = data;
     });
   }
