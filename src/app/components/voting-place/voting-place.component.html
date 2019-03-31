@@ -1,5 +1,20 @@
-<h1>Map</h1>
+<agm-map 
+  [latitude]='latitude' 
+  [longitude]='longitude'
+  [zoom]='16'>
 
-<agm-map [latitude]='latitude' [longitude]='longitude' 
-  [mapTypeId]='mapType'>
+  <agm-marker
+    *ngFor="let marker of markers"
+    [latitude]="marker.lat"
+    [longitude]="marker.lng"
+    [opacity]="marker.alpha"
+    [markerDraggable]="false"
+  >
+    <agm-info-window 
+    [disableAutoPan]="false"
+    [isOpen]="true">
+    {{marker.label}}
+    </agm-info-window>
+  </agm-marker>
+
 </agm-map>
