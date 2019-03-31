@@ -1,9 +1,12 @@
 
-<span class="header-title">Prezidentské voľby 2019</span>
-<img class="logo" src="../../../assets/znak.jpg" />
-<button mat-stroked-button routerLink="/parties">Zoznam kandidátov</button>
+<div class="header">
+  <h1 class="header-title">Voľby do Európskeho parlamentu 2019</h1>
+  <img class="logo" src="../../../assets/eu.svg" />
+  <button mat-stroked-button routerLink="/parties">Zoznam kandidátov</button>
+</div>
 
 <div class="wrapper">
+  <h2>Hľadáš svoju volebnú miestnosť?</h2>
   <main class="text-center">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <input
@@ -23,6 +26,6 @@
       </mat-option>
     </mat-autocomplete>
 
-    <p>Budem voliť <a (click)="setAddressVisible()">vo svojom okrsku</a> / <a routerLink="/voting-place">mám volebný preukaz</a></p>
+    <p><a (click)="setAddressVisible()">Volím vo svojom okrsku</a> / <a routerLink="/voting-place">Mám hlasovací preukaz</a></p>
   </main>
 </div>
