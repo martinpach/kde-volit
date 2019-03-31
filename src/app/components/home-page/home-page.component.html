@@ -1,7 +1,11 @@
+<span class="header-title">Prezidentské voľby 2019</span>
+<img class="logo" src="../../../assets/znak.jpg" />
+<button mat-stroked-button routerLink="/parties">Zoznam kandidátov</button>
 <div class="wrapper">
   <main class="text-center">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <input
+        #addressInput
         class="address-input"
         [class.address-input--hidden]="!showAddress"
         name="address"
@@ -17,7 +21,6 @@
       </mat-option>
     </mat-autocomplete>
 
-    <p>Budem voliť <a (click)="setAddressVisible()">vo svojom okrsku</a> / <a>mám volebný preukaz</a></p>
-    <button mat-stroked-button routerLink="/parties">Zoznam kandidátov</button>
+    <p>Budem voliť <a (click)="setAddressVisible()">vo svojom okrsku</a> / <a routerLink="/voting-place">mám volebný preukaz</a></p>
   </main>
 </div>

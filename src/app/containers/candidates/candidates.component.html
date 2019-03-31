@@ -2,7 +2,7 @@
   <h1 class="text-center">Zoznam kandidátov pre stranu {{ party }}</h1>
   <div class="candidates">
     <div *ngFor="let candidate of (candidates$ | async)">
-      <app-candidate [candidate]="candidate"></app-candidate>
+      <app-candidate [candidate]="candidate" (click)="dialogService.openCandidateDetailsDialog(candidate)"></app-candidate>
     </div>
   </div>
 </div>

@@ -1,0 +1,23 @@
+.wrapper {
+  position: relative;
+  button {
+    position: absolute;
+    top: -1.5rem;
+    right: -1.5rem;
+  }
+}
+
+.top {
+  display: flex;
+}
+
+.info {
+  margin-left: 2rem;
+}
+
+img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}

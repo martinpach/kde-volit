@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith, tap } from 'rxjs/operators';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  @ViewChild('addressInput') addressInput: ElementRef;
+
   showAddress = false;
   myControl = new FormControl();
   options: string[] = [];
@@ -18,7 +20,7 @@ export class HomePageComponent implements OnInit {
   dataset;
 
   constructor(private db: DatabaseService, private router: Router) {
-    this.db.getData().subscribe(data => {
+    this.db.getAllPlaces().subscribe(data => {
       this.dataset = data;
     });
   }
@@ -32,6 +34,7 @@ export class HomePageComponent implements OnInit {
 
   setAddressVisible() {
     this.showAddress = true;
+    this.addressInput.nativeElement.focus();
   }
 
   elastic(value) {
@@ -47,8 +50,9 @@ export class HomePageComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    const { place } = this.dataset.find(({ address }) => address === this.myControl.value);
-    this.router.navigate(['voting-place', place]);
+    const { place } = this.dataset.find(({ address }) => address === this.myControl.value) || { place: null };
+    if (!place) return;
+    this.router.navigate(['voting-place'], { queryParams: { place } });
   }
 
   private _filter(value: string): string[] {

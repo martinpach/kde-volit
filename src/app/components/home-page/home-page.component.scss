@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Archivo+Black');
 .address-input {
   display: block;
   transition: all 2s;
@@ -10,6 +11,23 @@
   &--hidden {
     display: none;
   }
+}
+
+.logo {
+  position: fixed;
+  top: 40px;
+  left: 115px;
+  max-width: 60px;
+  height: auto;
+}
+
+.header-title {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-family: 'Archivo Black', sans-serif;
 }
 
 p {
@@ -26,6 +44,13 @@ p {
 }
 
 a {
+  color: rgb(52, 54, 147);
   text-decoration: underline;
   cursor: pointer;
+}
+
+button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
 }

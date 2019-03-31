@@ -11,19 +11,19 @@ export class PartiesService {
   getParties(): Observable<PartyInfo[]> {
     return of([
       {
-        logo: 'https://picsum.photos/200/300/?random',
+        logo: '/assets/smer-logo.png',
         name: 'Smer'
       },
       {
-        logo: 'https://picsum.photos/200/300/?random',
+        logo: '/assets/sas-logo.png',
         name: 'SaS'
       },
       {
-        logo: 'https://picsum.photos/200/300/?random',
+        logo: '/assets/kdh-logo.jpg',
         name: 'KDH'
       },
       {
-        logo: 'https://picsum.photos/200/300/?random',
+        logo: '/assets/olano-logo.png',
         name: 'Oľano'
       }
     ]);

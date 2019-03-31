@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CandidateInfo } from '../../models/candidate-info';
 import { Observable } from 'rxjs';
 import { CandidatesService } from '../../services/candidates.service';
+import { DialogService } from '../../material/services/dialog.service';
 
 @Component({
   selector: 'app-candidates',
@@ -12,7 +13,7 @@ import { CandidatesService } from '../../services/candidates.service';
 export class CandidatesComponent implements OnInit {
   party: string;
   candidates$: Observable<CandidateInfo[]>;
-  constructor(private route: ActivatedRoute, private candidatesService: CandidatesService) {
+  constructor(private route: ActivatedRoute, private candidatesService: CandidatesService, private dialogService: DialogService) {
     this.party = route.snapshot.params['id'];
     this.candidates$ = this.candidatesService.getCandidatesByPartyName(this.party);
   }

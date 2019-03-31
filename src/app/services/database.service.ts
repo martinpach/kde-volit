@@ -7,7 +7,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class DatabaseService {
   constructor(private db: AngularFireDatabase) {}
 
-  getData() {
-    return this.db.list('volby').valueChanges();
+  getAllPlaces() {
+    return this.db.list('miestnosti').valueChanges();
   }
 }
