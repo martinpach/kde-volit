@@ -52,4 +52,15 @@ export class VotingPlaceComponent implements OnInit {
         this.longitude = lon;
       });
   }
+
+  openGmaps(event) {
+    console.log(event);
+
+
+    var lat = event.latitude;
+    var lon = event.longitude;
+    console.log(lat);
+
+    window.open(`https://maps.google.com/maps?daddr=${lat},${lon}&amp;ll=`);
+  }
 }

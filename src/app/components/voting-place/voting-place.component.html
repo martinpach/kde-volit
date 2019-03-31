@@ -9,6 +9,7 @@
     [longitude]="marker.lng"
     [opacity]="marker.alpha"
     [markerDraggable]="false"
+    (markerClick)="openGmaps($event)"
   >
     <agm-info-window 
     [disableAutoPan]="false"
