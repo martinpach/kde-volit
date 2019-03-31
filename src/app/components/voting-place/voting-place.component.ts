@@ -8,6 +8,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VotingPlaceComponent implements OnInit {
   place: string;
+  latitude = -28.68352;
+  longitude = -147.20785;
+  mapType = 'satellite';
 
   constructor(private route: ActivatedRoute) {
     this.place = route.snapshot.params['id'];

@@ -15,6 +15,7 @@ import { PartyComponent } from './components/party/party.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,10 @@ import { environment } from '../environments/environment';
     MaterialModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDlzcFXYOdt4VRj3jc8YoZUAt9WmCDrfZI'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
