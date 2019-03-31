@@ -8,7 +8,7 @@ import { PartiesComponent } from './containers/parties/parties.component';
 const routes: Routes = [
   { path: 'parties', component: PartiesComponent },
   { path: 'parties/:id/candidates', component: CandidatesComponent },
-  { path: 'voting-place', component: VotingPlaceComponent },
+  { path: 'voting-place/:id', component: VotingPlaceComponent },
   { path: '', component: HomePageComponent },
   { path: '**', redirectTo: '' }
 ];

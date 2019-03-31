@@ -1,17 +1,19 @@
 <div class="wrapper">
   <main class="text-center">
-    <input
-      class="address-input"
-      [class.address-input--hidden]="!showAddress"
-      name="address"
-      type="text"
-      placeholder="Adresa trvalého bydliska"
-      [formControl]="myControl"
-      [matAutocomplete]="auto"
-    />
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <input
+        class="address-input"
+        [class.address-input--hidden]="!showAddress"
+        name="address"
+        type="text"
+        placeholder="Adresa trvalého bydliska"
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+      />
+    </form>
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option}}
+      <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option">
+        {{ option }}
       </mat-option>
     </mat-autocomplete>
 

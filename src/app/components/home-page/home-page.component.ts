@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import { DatabaseService } from '../../services/database.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -16,18 +17,17 @@ export class HomePageComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   dataset;
 
-  constructor(private db:DatabaseService) {
-    this.db.getData().subscribe( data => {
+  constructor(private db: DatabaseService, private router: Router) {
+    this.db.getData().subscribe(data => {
       this.dataset = data;
     });
   }
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this.elastic(value))
-      );
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this.elastic(value))
+    );
   }
 
   setAddressVisible() {
@@ -38,17 +38,21 @@ export class HomePageComponent implements OnInit {
     this.options = [];
     var val = value;
 
-    for ( var x in this.dataset) {
-      if (this.dataset[x].address.indexOf(val) >= 0) {
+    for (var x in this.dataset) {
+      if (this.dataset[x].address.toLowerCase().indexOf(val.toLowerCase()) >= 0) {
         this.options = [...this.options, this.dataset[x].address];
       }
-    }   
-    return this.options; 
+    }
+    return this.options;
+  }
+
+  onSubmit(f: NgForm) {
+    const { place } = this.dataset.find(({ address }) => address === this.myControl.value);
+    this.router.navigate(['voting-place', place]);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
-
 }
