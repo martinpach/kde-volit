@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { DatabaseService } from '../../services/database.service';
 
 @Component({
   selector: 'app-home-page',
@@ -11,16 +12,21 @@ import {map, startWith} from 'rxjs/operators';
 export class HomePageComponent implements OnInit {
   showAddress = false;
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three', 'Hay'];
+  options: string[] = [];
   filteredOptions: Observable<string[]>;
+  dataset;
 
-  constructor() {}
+  constructor(private db:DatabaseService) {
+    this.db.getData().subscribe( data => {
+      this.dataset = data;
+    });
+  }
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(value))
+        map(value => this.elastic(value))
       );
   }
 
@@ -28,11 +34,21 @@ export class HomePageComponent implements OnInit {
     this.showAddress = true;
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  elastic(value) {
+    this.options = [];
+    var val = value;
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    for ( var x in this.dataset) {
+      if (this.dataset[x].address.indexOf(val) >= 0) {
+        this.options = [...this.options, this.dataset[x].address];
+      }
+    }   
+    return this.options; 
   }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
 
 }
