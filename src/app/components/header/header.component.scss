@@ -1,0 +1,45 @@
+nav {
+	height: 55px;
+	background: transparent;
+	z-index: 100;
+}
+img {
+	margin-right: 15px;
+}
+
+.navbar {
+	background: transparent;
+}
+
+.navbar-brand {
+	margin: 0;
+	cursor: pointer;
+}
+
+button {
+	margin: 0 5px;
+	background-color: white;
+}
+
+@media (max-width: 767.98px) {
+	.navbar-brand {
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+		font-size: 1em;
+	}
+
+	img {
+		width: 30px;
+	}
+
+	.candidates {
+		margin: 0 auto;
+	}
+}
+
+@media (max-width: 400px) {
+	.navbar-brand {
+		font-size: 0.7em;
+	}
+}

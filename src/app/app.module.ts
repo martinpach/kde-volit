@@ -17,6 +17,10 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
+import { AboutPageComponent } from './components/about-page/about-page.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { FormPageComponent } from './components/form-page/form-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { HttpClientModule } from '@angular/common/http';
     VotingPlaceComponent,
     CandidateComponent,
     PartiesComponent,
-    PartyComponent
+    PartyComponent,
+    AboutPageComponent,
+    HeaderComponent,
+    FooterComponent,
+    FormPageComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

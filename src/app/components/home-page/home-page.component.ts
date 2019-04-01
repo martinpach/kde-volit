@@ -35,6 +35,7 @@ export class HomePageComponent implements OnInit {
   setAddressVisible() {
     this.showAddress = true;
     this.addressInput.nativeElement.focus();
+    document.getElementById("wrapper-title").innerHTML = "Zadaj Adresu trvaleho bydliska:";
   }
 
   elastic(value) {
@@ -54,7 +55,7 @@ export class HomePageComponent implements OnInit {
     if (!place) return;
     this.router.navigate(['voting-place'], { queryParams: { place } });
   }
-
+  
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().includes(filterValue));

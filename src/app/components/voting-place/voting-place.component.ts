@@ -39,7 +39,9 @@ export class VotingPlaceComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    document.getElementById("page-logo-text").style.display = "none";
+  }
 
   createMarker(place) {
     this.http

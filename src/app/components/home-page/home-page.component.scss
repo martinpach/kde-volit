@@ -15,44 +15,15 @@
   }
 }
 
-.header {
-  width: 100%;
-  padding-top: 20px;
-  height: 15%;
-}
-
-.logo {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  max-width: 60px;
-  height: auto;
-}
-
-.header-title {
-  position: relative;
-  margin: 0 auto;
-  margin-left: 90px;
-  font-family: sans-serif;
-  text-transform: uppercase;
-  font-family: 'Merriweather', sans-serif;
-  font-size: 1.2em;
-}
-
-p {
-  font-size: 1.2rem;
-}
-
 .wrapper {
   width: 100%;
-  height: 85%;
+  height: calc(100% - 55px);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 3em;
   background-image: url("../../../assets/urna.jpg");
   background-size: 100%;
-  /*background-position: left bottom;*/
   background-position: 0 280px;
   background-repeat: no-repeat;
 }
@@ -63,56 +34,11 @@ a {
   cursor: pointer;
 }
 
-button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
+p {
+  font-size: 1.2rem;
 }
 
 h2 {
-  position: absolute;
-  top: 190px;
   font-size: 3em;
   font-weight: 600;
-}
-
-@media (max-width: 767.98px) { 
-
-  .header {
-    text-align: center;
-    width: 100%;
-  }
-
-  .header-title {
-    text-align: center;
-    width: 100%;
-    margin: 0;
-  }
-
-  .logo {
-    position: relative;
-    top: auto;
-    left: auto;
-    margin: 20px auto;
-  }
-
-  button {
-    float: left;
-    position: relative;
-    width: 80%;
-    top: auto;
-    right: auto;
-    margin: 0 10%;
-  }
-
-  .wrapper {
-    margin-top: 250px;
-    height: 50%;
-    background-image: none;
-  }
-
-  h2 {
-    padding: 20px;
-  }
-
 }

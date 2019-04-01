@@ -1,13 +1,8 @@
-
-<div class="header">
-  <h1 class="header-title">Voľby do Európskeho parlamentu 2019</h1>
-  <img class="logo" src="../../../assets/eu.svg" />
-  <button mat-stroked-button routerLink="/parties">Zoznam kandidátov</button>
-</div>
+<app-header></app-header>
 
 <div class="wrapper">
-  <h2>Hľadáš svoju volebnú miestnosť?</h2>
   <main class="text-center">
+    <h2 id="wrapper-title">Hľadáš svoju volebnú miestnosť?</h2>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <input
         #addressInput
@@ -26,6 +21,9 @@
       </mat-option>
     </mat-autocomplete>
 
-    <p><a (click)="setAddressVisible()">Volím vo svojom okrsku</a> / <a routerLink="/voting-place">Mám hlasovací preukaz</a></p>
+    <p><a href="#" (click)="setAddressVisible()">Volím vo svojom okrsku</a> / <a routerLink="/voting-place">Mám hlasovací preukaz</a></p>
   </main>
 </div>
+
+<app-footer></app-footer>
+
