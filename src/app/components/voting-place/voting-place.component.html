@@ -1,25 +1,2 @@
 <app-header></app-header>
-<!-- 
-<agm-map 
-  [latitude]='latitude' 
-  [longitude]='longitude'
-  [zoom]='16'>
-
-  <agm-marker
-    *ngFor="let marker of markers"
-    [latitude]="marker.lat"
-    [longitude]="marker.lng"
-    [opacity]="marker.alpha"
-    [markerDraggable]="false"
-    (markerClick)="openGmaps($event)"
-  >
-    <agm-info-window 
-    [disableAutoPan]="false"
-    [isOpen]="true">
-    {{marker.label}}
-    </agm-info-window>
-  </agm-marker>
-
-</agm-map> -->
-
 <div #gmap style="width:100%;height:100%; position: absolute; top:0; left:0;"></div>

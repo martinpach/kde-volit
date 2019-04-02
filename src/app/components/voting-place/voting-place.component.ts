@@ -23,7 +23,44 @@ export class VotingPlaceComponent implements OnInit {
   markers = [];
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private db: DatabaseService) {
-    route.queryParams.subscribe(({ place }) => {
+  }
+
+  ngOnInit() {
+    var mapProp = {
+      center: new google.maps.LatLng(this.latitude, this.longitude),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true,
+      zoomControl: true
+    };
+
+    var map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+  
+    document.getElementById("page-logo-text").style.display = "none";
+
+    // try geolocation
+    var infoWindow = new google.maps.InfoWindow({
+      disableAutoPan: true
+    });
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Tvoja lokácia.');
+        infoWindow.open(map);
+        map.setCenter(pos);
+    })};
+    this.loadMarkers();
+    this.map = map;
+  }
+
+
+  loadMarkers() {
+    this.route.queryParams.subscribe(({ place }) => {
       if (!place) {
         this.db.getAllPlaces('miestnosti').subscribe((places: any) => {
           places.forEach(p => this.addMarker(p.latlon.lat, p.latlon.lon, p.place));
@@ -37,46 +74,20 @@ export class VotingPlaceComponent implements OnInit {
           { timeout: 300000 }
         );
       } else {
-        this.createMarker(place);
+        this.createMarker(place, true);
       }
     });
   }
 
-  ngOnInit() {
-    var mapProp = {
-      center: new google.maps.LatLng(this.latitude, this.longitude),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true,
-      zoomControl: true
-    };
-
-    var map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
-    document.getElementById("page-logo-text").style.display = "none";
-
-    // try geolocation
-    var infoWindow = new google.maps.InfoWindow;
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
-        infoWindow.open(map);
-        map.setCenter(pos);
-    })};
-    this.map = map;
-  }
-
-  createMarker(place) {
+  createMarker(place, query) {
+    // todo implement db
     this.http
       .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place}&key=AIzaSyDlzcFXYOdt4VRj3jc8YoZUAt9WmCDrfZI`)
       .subscribe((data: any) => {
         var lat = data.results[0].geometry.location.lat;
         var lon = data.results[0].geometry.location.lng;
         this.addMarker(lat, lon, place);
+        this.map.setCenter(new google.maps.LatLng(lat, lon));
       });
   }
 
@@ -99,6 +110,5 @@ export class VotingPlaceComponent implements OnInit {
       window.open(`https://maps.google.com/maps?daddr=${lat},${lng}&amp;ll=`);
     });
   }
-
-
+  
 }
