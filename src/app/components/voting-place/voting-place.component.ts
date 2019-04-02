@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+/// <reference types="@types/googlemaps" />
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DatabaseService } from '../../services/database.service';
+import {enableProdMode} from '@angular/core';
+
+enableProdMode();
 
 @Component({
   selector: 'app-voting-place',
@@ -9,15 +13,14 @@ import { DatabaseService } from '../../services/database.service';
   styleUrls: ['./voting-place.component.scss']
 })
 export class VotingPlaceComponent implements OnInit {
+
+  @ViewChild('gmap') gmapElement: any;
+  map: google.maps.Map;
+
   // implement current location
   latitude = 48.716196;
   longitude = 21.256138;
-
   markers = [];
-
-  addMarker(lat: number, lng: number, label: string) {
-    this.markers.push({ lat, lng, alpha: 1, label });
-  }
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private db: DatabaseService) {
     route.queryParams.subscribe(({ place }) => {
@@ -40,7 +43,31 @@ export class VotingPlaceComponent implements OnInit {
   }
 
   ngOnInit() {
+    var mapProp = {
+      center: new google.maps.LatLng(this.latitude, this.longitude),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true,
+      zoomControl: true
+    };
+
+    var map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
     document.getElementById("page-logo-text").style.display = "none";
+
+    // try geolocation
+    var infoWindow = new google.maps.InfoWindow;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Location found.');
+        infoWindow.open(map);
+        map.setCenter(pos);
+    })};
+    this.map = map;
   }
 
   createMarker(place) {
@@ -50,19 +77,28 @@ export class VotingPlaceComponent implements OnInit {
         var lat = data.results[0].geometry.location.lat;
         var lon = data.results[0].geometry.location.lng;
         this.addMarker(lat, lon, place);
-        this.latitude = lat;
-        this.longitude = lon;
       });
   }
 
-  openGmaps(event) {
-    console.log(event);
+  addMarker(lat: number, lng: number, label: string) {
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(lat, lng),
+      // icon size should be 32x32
+      icon: 'https://developers.google.com/maps/documentation/javascript/examples/' +
+        'full/images/info-i_maps.png',
+      map: this.map
+    });
 
+    var info = new google.maps.InfoWindow({
+      content: label,
+      disableAutoPan: true
+    })
 
-    var lat = event.latitude;
-    var lon = event.longitude;
-    console.log(lat);
-
-    window.open(`https://maps.google.com/maps?daddr=${lat},${lon}&amp;ll=`);
+    info.open(this.map, marker);
+    marker.addListener('click', function() {
+      window.open(`https://maps.google.com/maps?daddr=${lat},${lng}&amp;ll=`);
+    });
   }
+
+
 }
